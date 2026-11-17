@@ -12,7 +12,7 @@ body{margin:0;background:#EDEDED;font-family:'IBM Plex Sans',sans-serif;color:#1
 .k{font-family:'Kalam',cursive}
 .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 56px;display:flex;flex-direction:column;gap:28px}
 .bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.card{background:#FCFCFC;border:1px solid #D6D6D6;border-radius:18px;box-shadow:0 18px 40px rgba(40,40,40,.10);padding:22px 24px 26px;display:flex;flex-direction:column;gap:18px;scroll-margin-top:16px}
+.card{background:#FCFCFC;border:1px solid #D6D6D6;border-radius:18px;box-shadow:0 18px 40px rgba(40,40,40,.10);padding:22px 24px 26px;display:flex;flex-direction:column;gap:18px;scroll-margin-top:120px}
 .g{filter:grayscale(1)}
 .top{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -34,7 +34,11 @@ button:focus-visible{outline:3px solid #2F4FA8;outline-offset:2px}
 .out{border-radius:12px;padding:14px;font-size:16px;line-height:1.5}
 
 .half{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:14px}
-.tag{max-width:300px;display:flex;flex-direction:column;gap:4px;border:1px solid #D6D6D6;border-radius:10px;padding:8px 10px;background:#fff}
+.tag{max-width:280px;display:flex;flex-direction:column;gap:2px;border:1px solid #D6D6D6;border-radius:8px;padding:6px 8px;background:#fff}
+.tag span{font-size:12px !important}
+.hd{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+@media (min-width:900px){.hd{min-height:132px}}
+.def{font:inherit;font-weight:600;color:#9B1F5C;background:none;border:0;border-bottom:2px dotted #9B1F5C;padding:0;border-radius:0}
 .flipcard{width:100%;min-height:240px;border-radius:18px;background:#fff;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#1F1D2B}
 .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .sticky{min-height:104px;width:100%;background:#E8E8E8;border-radius:4px;padding:10px;font-family:'Kalam',cursive;font-size:17px;line-height:1.3;box-shadow:0 4px 10px rgba(40,40,40,.10)}
@@ -70,11 +74,16 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 @keyframes hint{0%,100%{opacity:1}50%{opacity:.55}}
 .reveal{animation:turn .45s ease-out}
 @keyframes turn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
-@media (max-width:700px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.yn{grid-template-columns:1fr}}
+.pin{position:sticky;top:0;z-index:20;background:#EDEDED;padding:10px 0;border-bottom:1px solid #D6D6D6}
+.pin .chip{transition:background .6s ease,color .6s ease,border-color .6s ease}
+.pin .sq,.pin .st{transition:opacity .9s ease}
+.pin .dot{transition:transform .9s ease}
+@media (max-width:700px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.yn{grid-template-columns:1fr}.pin .chip{font-size:11px;padding:3px 8px}.pin .top{gap:8px}}
 @media (prefers-reduced-motion:reduce){
 .term,.belt,.hint,.reveal,.bub,.pour,.hand{animation:none}
 .tub{animation:none;transform:translateX(260px)}
 .beam,.total,.bubble,.spill,.bub{animation:none;opacity:1}
+.pin .chip,.pin .sq,.pin .st,.pin .dot{transition:none}
 }
 </style>
 </head>
@@ -82,7 +91,7 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 <main class="wrap">
 
 <!-- ============ 1 · COVER ============ -->
-<section class="card" id="cover">
+<section class="card" id="cover" data-stage="0" data-c="0">
 <h1 class="k" style="font-size:54px;line-height:1.05;color:#333">Everyday Design</h1>
 <p class="k" style="font-size:28px;line-height:1.3;color:#4D4D4D">How design thinking can unlock the extraordinary potential within ordinary problems</p>
 <div style="border:1px solid #D6D6D6;border-radius:14px;padding:18px 20px;background:#fff;display:flex;flex-direction:column;gap:12px">
@@ -110,19 +119,20 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 <span><svg width="20" height="20" aria-hidden="true" style="vertical-align:-3px"><circle cx="10" cy="10" r="9" fill="#3E6B4E"></circle></svg> a good enough outcome</span>
 </div>
 </div>
-<p style="font-size:17px;line-height:1.55;color:#3D3D3D">Watch the line at the top of each section: it starts as a scribble and straightens as the problem gets clear.</p>
+<p style="font-size:17px;line-height:1.55;color:#3D3D3D">Watch the line at the top of the screen: it starts as a scribble and straightens as the problem gets clear.</p>
 </section>
 
 <!-- ============ 2 · CHECKOUT ============ -->
-<section class="card g" id="checkout"><div class="top" data-stage="0" data-c="0.12"></div>
-<div class="row" style="align-items:center">
-<div class="col" style="flex:1.3 1 460px;gap:10px">
-<svg viewBox="0 0 560 330" style="width:100%;filter:blur(1px)" role="img" aria-label="Animated line drawing: a week's groceries ride the checkout belt. The scanner flashes on the yogurt, the screen shows yogurt 14 to 16 dollars, and a thought bubble appears: I'm really spending a lot on yogurt">
+<section class="card g" id="checkout" data-stage="0" data-c="0.12">
+<div class="col" style="align-items:center;text-align:center;gap:16px">
+<span class="lab">Noticing · fuzzy encounters</span>
+<h2 class="k" style="font-size:38px;line-height:1.2;font-weight:700;color:#1F1D2B">What situation keeps popping up in need of fixing?</h2>
+<svg viewBox="0 0 560 330" style="width:100%;max-width:620px;display:block;margin:0 auto" role="img" aria-label="Animated line drawing: a week's groceries ride the checkout belt. The scanner flashes on the yogurt, the screen shows yogurt 14 to 16 dollars, and a thought bubble appears: I'm really spending a lot on yogurt">
 <circle cx="92" cy="88" r="28" fill="none" stroke="#1F1D2B" stroke-width="3"></circle><circle cx="83" cy="84" r="2.5" fill="#1F1D2B"></circle><circle cx="101" cy="84" r="2.5" fill="#1F1D2B"></circle>
 <path d="M80 102 Q92 94 104 102" fill="none" stroke="#1F1D2B" stroke-width="2.5" stroke-linecap="round"></path>
 <path d="M92 116 L92 200 M92 140 L60 175 M92 140 L130 168" stroke="#1F1D2B" stroke-width="3" fill="none" stroke-linecap="round"></path>
-<g class="bubble"><ellipse cx="230" cy="58" rx="112" ry="40" fill="#fff" stroke="#9B1F5C" stroke-width="2.5"></ellipse><circle cx="140" cy="100" r="7" fill="#fff" stroke="#9B1F5C" stroke-width="2"></circle><circle cx="124" cy="114" r="4" fill="#fff" stroke="#9B1F5C" stroke-width="2"></circle>
-<text x="230" y="52" text-anchor="middle" font-family="Kalam, cursive" font-size="19" fill="#9B1F5C">I'm really spending</text><text x="230" y="76" text-anchor="middle" font-family="Kalam, cursive" font-size="19" fill="#9B1F5C">a lot on yogurt.</text></g>
+<g class="bubble"><ellipse cx="262" cy="58" rx="136" ry="52" fill="#fff" stroke="#9B1F5C" stroke-width="2.5"></ellipse><circle cx="148" cy="106" r="7" fill="#fff" stroke="#9B1F5C" stroke-width="2"></circle><circle cx="130" cy="120" r="4" fill="#fff" stroke="#9B1F5C" stroke-width="2"></circle>
+<text x="262" y="50" text-anchor="middle" font-family="Kalam, cursive" font-size="26" fill="#9B1F5C">I'm really spending</text><text x="262" y="82" text-anchor="middle" font-family="Kalam, cursive" font-size="26" fill="#9B1F5C">a lot on yogurt.</text></g>
 <rect x="400" y="120" width="130" height="62" rx="6" fill="none" stroke="#1F1D2B" stroke-width="3"></rect><line x1="465" y1="182" x2="465" y2="226" stroke="#1F1D2B" stroke-width="3"></line>
 <g class="total"><text x="465" y="144" text-anchor="middle" font-family="Kalam, cursive" font-size="15" fill="#9B1F5C">yogurt</text><text x="465" y="170" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="600" font-size="24" fill="#1F1D2B">$14–16</text></g>
 <rect x="280" y="176" width="40" height="50" rx="4" fill="none" stroke="#1F1D2B" stroke-width="3"></rect>
@@ -142,43 +152,42 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 <g><path d="M240 258 L240 214 Q240 204 250 200 L256 186 L270 186 L276 200 Q290 204 290 214 L290 258 Z" fill="#fff" stroke="#1F1D2B" stroke-width="2.2"></path><path d="M276 204 Q298 210 290 232" fill="none" stroke="#1F1D2B" stroke-width="2"></path><text x="264" y="232" text-anchor="middle" font-family="Kalam, cursive" font-size="11" fill="#2F4FA8">whole</text><text x="264" y="246" text-anchor="middle" font-family="Kalam, cursive" font-size="11" fill="#2F4FA8">milk</text></g>
 </g>
 </svg>
-<p class="k" style="font-size:17px;line-height:1.4;color:#4A4855">This image is intentionally fuzzy. You start off with a very vague sort of impression of what could be off. And then gradually it becomes clear.</p>
-</div>
-<div class="col" style="flex:1 1 320px;gap:16px">
-<span class="lab">Noticing · fuzzy encounters</span>
-<h2 class="k" style="font-size:38px;line-height:1.2;font-weight:700;color:#1F1D2B">What situation keeps popping up in need of fixing?</h2>
-<p class="k" style="font-size:19px;line-height:1.4;color:#3D3B47">Every time I'm at the grocery checkout, I think: "I'm really spending a lot on yogurt."</p>
-</div>
+<p class="k" style="font-size:24px;line-height:1.4;color:#3D3B47;max-width:640px">Every time I'm at the grocery checkout, I think: "I'm really spending a lot on yogurt."</p>
 </div>
 </section>
 
 <!-- ============ 3 · DESIGN WORTHY ============ -->
-<section class="card g" id="worthy"><div class="top" data-stage="0" data-c="0.34"></div>
+<section class="card g" id="worthy" data-stage="0" data-c="0.34">
 <h2 class="k" style="font-size:40px;line-height:1.1;color:#9B1F5C">What makes a friction point design worthy?</h2>
-<span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9B1F5C;margin-bottom:-8px">Criteria <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4A4855">· hover or focus a criterion for its meaning</span></span>
+<span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9B1F5C;margin-bottom:-8px">Criteria <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#4A4855">· tap a criterion for its meaning</span></span>
 <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
-<div style="flex:1 1 160px;border:2px solid #9B1F5C;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px"><span><span tabindex="0" title="It keeps coming back, not just once." style="cursor:help;font-weight:600;color:#9B1F5C;border-bottom:2px dotted #9B1F5C">Repeated?</span> <span style="color:#1E6B52;font-weight:700">✓</span></span><span style="font-size:14px">at every checkout</span></div>
+<div style="flex:1 1 160px;border:2px solid #9B1F5C;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px"><span><button class="def" data-show="d-rep" aria-expanded="false">Repeated?</button> <span style="color:#1E6B52;font-weight:700">✓</span></span><span id="d-rep" class="reveal" hidden style="font-size:14px;color:#3D3B47">It keeps coming back, not just once.</span><span style="font-size:14px">at every checkout</span></div>
 <span aria-hidden="true" style="font-size:26px">→</span>
-<div style="flex:1 1 160px;border:2px solid #9B1F5C;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px"><span><span tabindex="0" title="It touches something I am not willing to give up." style="cursor:help;font-weight:600;color:#9B1F5C;border-bottom:2px dotted #9B1F5C">Relevant?</span> <span style="color:#1E6B52;font-weight:700">✓</span></span><span style="font-size:14px">"I'm not willing to cut it out."</span></div>
+<div style="flex:1 1 160px;border:2px solid #9B1F5C;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px"><span><button class="def" data-show="d-rel" aria-expanded="false">Relevant?</button> <span style="color:#1E6B52;font-weight:700">✓</span></span><span id="d-rel" class="reveal" hidden style="font-size:14px;color:#3D3B47">It touches something I am not willing to give up.</span><span style="font-size:14px">"I'm not willing to do without yogurt."</span></div>
 <span aria-hidden="true" style="font-size:26px">→</span>
-<div style="flex:1 1 200px;border:2px solid #9B1F5C;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px"><span><span tabindex="0" title="I feel it: going without would affect me." style="cursor:help;font-weight:600;color:#9B1F5C;border-bottom:2px dotted #9B1F5C">Resonant/Emotionally Salient?</span> <span style="color:#1E6B52;font-weight:700">✓</span></span><span style="font-size:14px">"…I won't have the budget for other groceries."</span><span style="font-size:14px">"It will feel disappointing to not have my daily serving of yogurt."</span></div>
+<div style="flex:1 1 200px;border:2px solid #9B1F5C;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px"><span><button class="def" data-show="d-res" aria-expanded="false">Resonant/Emotionally Salient?</button> <span style="color:#1E6B52;font-weight:700">✓</span></span><span id="d-res" class="reveal" hidden style="font-size:14px;color:#3D3B47">I feel it: going without would affect me.</span><span style="font-size:14px">"…I won't have the budget for other groceries."</span><span style="font-size:14px">"It will feel disappointing to not have my daily serving of yogurt."</span></div>
 </div>
 <span style="align-self:center;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9B1F5C;margin-bottom:-8px">Cost</span>
 <div class="k" style="align-self:center;max-width:620px;border:3px solid #1F1D2B;border-radius:16px;padding:18px 22px;text-align:center;font-size:26px;line-height:1.3">"Am I so committed to eating yogurt that I'm willing to sacrifice buying other food?"</div>
 <div class="yn" data-group>
 <div><button class="ynb" data-show="w-yes" aria-pressed="false" style="border:2px solid #4A4855;color:#1F1D2B">Yes</button><div id="w-yes" class="out reveal" hidden style="border:2px solid #4A4855;background:#F1EFEC">No change. Adjust habits to accommodate rising yogurt costs. <strong>Not a "worthy enough" problem.</strong></div></div>
-<div><button class="ynb" data-show="w-no" aria-pressed="false" style="border:2px solid #1E6B52;color:#1E6B52">No</button><div id="w-no" class="out reveal" hidden style="border:2px solid #1E6B52;background:#E6F2EC"><strong class="k" style="font-size:24px;color:#1E6B52">Ripe for design.</strong><br>"What can I do about this?"</div></div>
+<div><button class="ynb" data-show="w-no" aria-pressed="false" style="border:2px solid #1E6B52;color:#1E6B52">No</button><div id="w-no" class="out reveal" hidden style="border:2px solid #1E6B52;background:#E6F2EC"><strong class="k" style="font-size:24px;color:#1E6B52">Ripe for design.</strong><br>"What can I do about this?"<span aria-hidden="true" style="display:block;text-align:center;font-size:34px;line-height:1;margin-top:8px;color:#1E6B52">↓</span></div></div>
 </div>
 <span style="align-self:center;font-size:14px;color:#4A4855">Tap Yes or No to follow the path.</span>
 </section>
 
+<!-- ============ END OF THE YES PATH (shown only after Yes) ============ -->
+<section class="card g" id="yes-end" hidden data-stage="0" data-c="0.34" aria-label="End of the Yes path" style="align-items:center;text-align:center">
+<p class="k" style="font-size:34px;line-height:1.25;color:#1F1D2B;max-width:720px">May your spending adjustment proceed smoothly! Your design journey ends here.</p>
+<p style="font-size:18px;line-height:1.5;color:#3D3B47">Curious about where No leads? Keep going to find out</p>
+<span aria-hidden="true" style="font-size:34px;line-height:1;color:#4A4855">↓</span>
+</section>
+
 <!-- ============ 4 · SURFACE THE FRICTION ============ -->
-<section class="card g" id="friction"><div class="top" data-stage="0" data-c="0.48"></div>
+<section class="card g" id="friction" data-stage="0" data-c="0.48">
 <div class="row" style="gap:32px">
 <div class="col" style="flex:1 1 400px">
-<span class="lab">Questioning</span>
 <h2 class="k" style="font-size:46px;line-height:1.05;font-weight:700;color:#9B1F5C">Surfacing the friction</h2>
-<p style="font-size:17px;line-height:1.55">What's underneath: <strong>figuring out why the friction matters to you.</strong></p>
 <p class="k" style="font-size:22px;line-height:1.35">There <em>has to</em> be a way to stick to my budget and keep enjoying a favorite food.</p>
 <span style="font-size:15px;color:#4A4855">Look at the situation from different angles</span>
 <div style="display:flex;gap:8px;flex-wrap:wrap" data-angles>
@@ -219,7 +228,7 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 </section>
 
 <!-- ============ 5 · THE QUESTION ============ -->
-<section class="card g" id="question"><div class="top" data-stage="1" data-c="0.82"></div>
+<section class="card g" id="question" data-stage="1" data-c="0.82">
 <span class="lab">Turn into a question · then dissect it</span>
 <p class="k" style="font-size:38px;line-height:1.45">
 <button data-part="0" style="font:inherit;background:none;border:none;border-bottom:4px solid #1F1D2B;padding:0 2px;color:#1F1D2B">How</button> can I have access to <button data-part="1" style="font:inherit;background:none;border:none;border-bottom:4px solid #9B1F5C;padding:0 2px;color:#9B1F5C">as much yogurt as I want</button>, <button data-part="2" style="font:inherit;background:none;border:none;border-bottom:4px solid #1E6B52;padding:0 2px;color:#1E6B52">when I want it</button>, <button data-part="3" style="font:inherit;background:none;border:none;border-bottom:4px solid #2F4FA8;padding:0 2px;color:#2F4FA8">in the style I prefer</button>, <button data-part="4" style="font:inherit;background:none;border:none;border-bottom:4px solid #8A4B08;padding:0 2px;color:#8A4B08">for as little money as possible</button>?
@@ -238,11 +247,11 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 </section>
 
 <!-- ============ 6 · START WHERE YOU ARE + USE WHAT YOU HAVE ============ -->
-<section class="card g" id="start"><div class="top" data-stage="2" data-c="0.88"></div>
+<section class="card g" id="start" data-stage="2" data-c="0.88">
 <span class="lab">Start working toward solutions · resolving the friction(s)</span>
 <div class="row" style="gap:24px">
 <div class="half">
-<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-start">
+<div class="hd">
 <h2 class="k" style="font-size:40px;line-height:1.1;color:#9B1F5C">Start where you are.</h2>
 <div class="tag"><span style="font-size:13px;font-weight:600;color:#2F4FA8">Satisficing · Simon, 1956</span><span style="font-size:13px;line-height:1.4;color:#3D3B47">Set a "good enough bar" that will allow you to stop looking.</span></div>
 </div>
@@ -261,7 +270,7 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 </button>
 </div>
 <div class="half">
-<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-start">
+<div class="hd">
 <h2 class="k" style="font-size:40px;line-height:1.1;color:#1E6B52">Use what you have.</h2>
 <div class="tag"><span style="font-size:13px;font-weight:600;color:#2F4FA8">Bricolage · Lévi-Strauss, 1962</span><span style="font-size:13px;line-height:1.4;color:#3D3B47">Making do with whatever is at hand, like cooking dinner from what's already in the fridge.</span></div>
 </div>
@@ -282,7 +291,7 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 </section>
 
 <!-- ============ 8 · ROUND 1 ============ -->
-<section class="card g" id="round1"><div class="top" data-stage="2" data-c="0.66"></div>
+<section class="card g" id="round1" data-stage="2" data-c="0.66">
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-start">
 <div class="col" style="gap:6px"><span class="lab">Prototype &amp; iterate · Round 1</span>
 <h2 class="k" style="font-size:38px;line-height:1.15;color:#333"><em>Could I</em> make yogurt at home?</h2></div>
@@ -351,7 +360,7 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 </section>
 
 <!-- ============ 9 · ROUND 2 ============ -->
-<section class="card g" id="round2"><div class="top" data-stage="2" data-c="0.70"></div>
+<section class="card g" id="round2" data-stage="2" data-c="0.70">
 <span class="lab" style="color:#333">Prototype and iterate · Round 2</span>
 <h2 class="k" style="font-size:46px;line-height:1.1;color:#333">Digging Deeper</h2>
 <button class="term" data-show="bulb" aria-expanded="false" aria-label="Lightbulb: tap to see what I realized" style="align-self:flex-start;display:flex;align-items:center;gap:14px;min-height:44px;padding:10px 20px;border-radius:16px;font-family:'Kalam',cursive;font-size:20px">
@@ -369,10 +378,10 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 <div class="box" style="flex:1 1 260px;border-color:#444"><span class="t">DOCUMENT</span><span class="b">Thick yogurt comes from straining the whey from the cultured milk.</span></div>
 </div>
 <div style="padding-left:46px;display:flex"><div class="box" style="flex:1 1 260px;border-color:#1F1F1F"><span class="t">ASK</span><span class="b">How do others do the straining step?</span></div></div>
-<!-- D15 option B: labels "Ruled out" / "Tested" are Claude's; confirm -->
 <div class="k" style="padding-left:46px;font-size:20px;line-height:1.45;display:flex;flex-direction:column;gap:6px">
-<span><strong>Ruled out:</strong> People hang the yogurt from a hook in cheesecloth and let gravity do the draining. That is too potentially messy for me to even try.</span>
-<span><strong>Tested:</strong> A flat splatter screen, for its very fine holes.</span>
+<span>People hang the yogurt from a hook in cheesecloth and let gravity do the draining. That is too potentially messy for me to even try.</span>
+<span>Instead, I bought a flat splatter screen because the holes were very fine.</span>
+<span>Straining worked to make the yogurt thick!</span>
 </div>
 </div>
 <div class="col" style="gap:12px">
@@ -390,7 +399,7 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 </section>
 
 <!-- ============ 10 · FINAL WORKFLOW ============ -->
-<section class="card g" id="workflow"><div class="top" data-stage="3" data-c="1"></div>
+<section class="card g" id="workflow" data-stage="3" data-c="1">
 <span class="lab">Deliver · the workflow</span>
 <h2 class="k" style="font-size:44px;line-height:1.1">Final Yogurt Workflow</h2>
 <p class="k" style="font-size:22px;line-height:1.4;color:#3D3B47;margin-top:-8px">3 years of iterating got me to a "good enough" process and I re-opened the design when a new tool came on the scene: The Instant Pot</p>
@@ -410,7 +419,7 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 </section>
 
 <!-- ============ 11 · WHAT IT GAVE ME ============ -->
-<section class="card g" id="takeaway"><div class="top" data-stage="3" data-c="1"></div>
+<section class="card g" id="takeaway" data-stage="3" data-c="1">
 <span class="lab" style="color:#1E6B52">Deliver · the takeaway</span>
 <h2 class="k" style="font-size:44px;line-height:1.1;color:#1E6B52">I got yogurt in the end, but more importantly…</h2>
 <p class="k" style="margin-top:-8px;font-size:22px;line-height:1.4;color:#3D3B47">The long, slow, fit-to-my-life design process of figuring out how to have yogurt resulted in learning that's been durable and transferable</p>
@@ -433,12 +442,24 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
 <script>
 (function(){
   var names=['Discover','Define','Develop','Deliver'];
-  document.querySelectorAll('.top').forEach(function(t){
-    var st=+t.dataset.stage, c=+t.dataset.c, x=Math.round(6+c*228);
-    var chips=names.map(function(n,i){return '<span class="chip'+(i===st?' on':'')+'">'+(i===st?'◆ ':'◇ ')+n+'</span>';}).join('');
-    t.innerHTML='<div class="chips" aria-label="Where you are in the Double Diamond">'+chips+'</div>'+
-      '<div class="cl"><span class="k" style="font-size:16px;color:#4A4855">fuzzy</span><svg viewBox="0 0 240 34" role="img" aria-label="Clarity line: scribbled when the problem is fuzzy, straight when it is clear"><path d="M6 17 C 20 2, 28 32, 42 14 S 62 30, 74 8 S 96 30, 108 16 S 130 4, 142 22 S 166 10, 178 18 S 204 12, 234 17" fill="none" stroke="#9B1F5C" stroke-width="2.5" stroke-linecap="round" style="opacity:'+(1-c).toFixed(2)+'"></path><line x1="6" y1="17" x2="234" y2="17" stroke="#1E6B52" stroke-width="3" stroke-linecap="round" style="opacity:'+c.toFixed(2)+'"></line><circle cx="'+x+'" cy="17" r="6" fill="#1F1D2B"></circle></svg><span class="k" style="font-size:16px;color:#555">clear</span></div>';
-  });
+  // pinned clarity bar: one bar, dot glides as each section comes into view
+  var pin=document.createElement('div');pin.className='pin';
+  pin.innerHTML='<div class="top"><div class="chips" aria-label="Where you are in the Double Diamond">'+names.map(function(n){return '<span class="chip">◇ '+n+'</span>';}).join('')+'</div>'+
+    '<div class="cl"><span class="k" style="font-size:16px;color:#4A4855">fuzzy</span><svg viewBox="0 0 240 34" role="img" aria-label="Clarity line: scribbled when the problem is fuzzy, straight when it is clear"><path class="sq" d="M6 17 C 20 2, 28 32, 42 14 S 62 30, 74 8 S 96 30, 108 16 S 130 4, 142 22 S 166 10, 178 18 S 204 12, 234 17" fill="none" stroke="#9B1F5C" stroke-width="2.5" stroke-linecap="round"></path><line class="st" x1="6" y1="17" x2="234" y2="17" stroke="#1E6B52" stroke-width="3" stroke-linecap="round"></line><circle class="dot" cx="6" cy="17" r="6" fill="#1F1D2B"></circle></svg><span class="k" style="font-size:16px;color:#555">clear</span></div></div>';
+  var main=document.querySelector('main');main.insertBefore(pin,main.firstChild);
+  var chipEls=pin.querySelectorAll('.chip'),sq=pin.querySelector('.sq'),stl=pin.querySelector('.st'),dot=pin.querySelector('.dot');
+  var secs=Array.prototype.slice.call(document.querySelectorAll('section[data-c]')),last='';
+  function update(){
+    var y=window.innerHeight*0.35,cur=secs[0];
+    secs.forEach(function(sct){if(sct.hidden)return;if(sct.getBoundingClientRect().top<=y)cur=sct;});
+    var st=+cur.dataset.stage,c=+cur.dataset.c,key=st+'|'+c;if(key===last)return;last=key;
+    chipEls.forEach(function(ch,i){ch.className='chip'+(i===st?' on':'');ch.textContent=(i===st?'◆ ':'◇ ')+names[i];});
+    sq.style.opacity=(1-c).toFixed(2);stl.style.opacity=c.toFixed(2);dot.style.transform='translateX('+Math.round(c*228)+'px)';
+  }
+  var ticking=false;
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(function(){ticking=false;update();});}},{passive:true});
+  window.addEventListener('resize',update);
+  update();
   function $(id){return document.getElementById(id);}
   // simple reveal (show once / toggle), yes-no groups, solo panels
   document.querySelectorAll('[data-show]').forEach(function(b){
@@ -453,6 +474,10 @@ ol.wf li{break-inside:avoid;margin-bottom:4px}
   document.querySelectorAll('[data-flip]').forEach(function(b){
     b.addEventListener('click',function(){var f=b.querySelector('.front'),k=b.querySelector('.back');var on=k.hidden;k.hidden=!on;f.hidden=on;b.setAttribute('aria-pressed',String(on));});
   });
+  // Yes opens the end-of-journey card and scrolls to it; No closes it
+  var endc=$('yes-end'),rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelector('[data-show="w-yes"]').addEventListener('click',function(){endc.hidden=false;update();setTimeout(function(){endc.scrollIntoView({behavior:rm?'auto':'smooth',block:'nearest'});},700);});
+  document.querySelector('[data-show="w-no"]').addEventListener('click',function(){endc.hidden=true;last='';update();});
   // angles
   document.querySelectorAll('[data-angle]').forEach(function(b){
     b.addEventListener('click',function(){document.querySelectorAll('[data-angle]').forEach(function(o){o.setAttribute('aria-pressed','false');o.style.background='#fff';o.style.color='#2F4FA8';});b.setAttribute('aria-pressed','true');b.style.background='#2F4FA8';b.style.color='#fff';$('angleText').textContent=b.dataset.angle;});
